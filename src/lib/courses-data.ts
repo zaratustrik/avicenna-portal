@@ -1,0 +1,357 @@
+export type Level = "Базовый" | "Резидент" | "Продвинутый" | "Экспертный";
+export type Status = "active" | "completed" | "locked";
+
+export interface Course {
+  id: string;
+  tag: string;
+  tagColor: string;
+  title: string;
+  modules: number;
+  minutes: number;
+  level: Level;
+  nmo: number;        // НМО баллы
+  progress?: number;  // 0–100
+  status: Status;
+  description: string;
+  instructor: string;
+}
+
+export interface Specialty {
+  id: string;
+  label: string;
+  icon: string;
+  count: number;
+}
+
+export const specialties: Specialty[] = [
+  { id: "all",          label: "Все направления",     icon: "🏥", count: 48 },
+  { id: "lap-surgery",  label: "Лапароскопия",         icon: "🔬", count: 12 },
+  { id: "gynecology",   label: "Гинекология",          icon: "🩺", count: 9  },
+  { id: "cardiology",   label: "Кардиология",          icon: "❤️", count: 7  },
+  { id: "anesthesia",   label: "Анестезиология",       icon: "💉", count: 6  },
+  { id: "oncology",     label: "Онкология",            icon: "🧬", count: 5  },
+  { id: "neurology",    label: "Неврология",           icon: "🧠", count: 5  },
+  { id: "orthopedics",  label: "Ортопедия",            icon: "🦴", count: 4  },
+];
+
+export const courses: Course[] = [
+  // ── ЛАПАРОСКОПИЧЕСКАЯ ХИРУРГИЯ ──
+  {
+    id: "lap-01",
+    tag: "Лапароскопия",
+    tagColor: "clinical",
+    title: "Лапароскопическая холецистэктомия: базовый курс",
+    modules: 8, minutes: 95, level: "Базовый", nmo: 6, progress: 65,
+    status: "active",
+    description: "Показания, противопоказания, техника выполнения, разбор типичных ошибок.",
+    instructor: "проф. Петров А.В.",
+  },
+  {
+    id: "lap-02",
+    tag: "Лапароскопия",
+    tagColor: "clinical",
+    title: "Лапароскопическая герниопластика",
+    modules: 6, minutes: 75, level: "Резидент", nmo: 4, progress: 30,
+    status: "active",
+    description: "TEP и TAPP доступы. Работа с сеткой. Профилактика рецидивов.",
+    instructor: "д.м.н. Семёнов И.К.",
+  },
+  {
+    id: "lap-03",
+    tag: "Лапароскопия",
+    tagColor: "clinical",
+    title: "Резекция кишечника лапароскопическим доступом",
+    modules: 10, minutes: 120, level: "Продвинутый", nmo: 8, progress: 0,
+    status: "locked",
+    description: "Правосторонняя и левосторонняя гемиколэктомия. Анастомозы.",
+    instructor: "проф. Захаров М.Н.",
+  },
+  {
+    id: "lap-04",
+    tag: "Лапароскопия",
+    tagColor: "clinical",
+    title: "Острый аппендицит: диагностика и лапароскопическая аппендэктомия",
+    modules: 5, minutes: 60, level: "Базовый", nmo: 4, progress: 100,
+    status: "completed",
+    description: "Атипичное расположение, интраоперационные находки, дренирование.",
+    instructor: "к.м.н. Лебедев С.П.",
+  },
+  {
+    id: "lap-05",
+    tag: "Лапароскопия",
+    tagColor: "clinical",
+    title: "Осложнения лапароскопических операций: профилактика и лечение",
+    modules: 7, minutes: 85, level: "Продвинутый", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Повреждение желчных протоков, кровотечения, конверсия доступа.",
+    instructor: "проф. Петров А.В.",
+  },
+  {
+    id: "lap-06",
+    tag: "Лапароскопия",
+    tagColor: "clinical",
+    title: "Лапароскопия при ЖКТ-кровотечениях",
+    modules: 6, minutes: 70, level: "Экспертный", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Ургентные ситуации, тактика, остановка кровотечения, гемостаз.",
+    instructor: "проф. Захаров М.Н.",
+  },
+
+  // ── ГИНЕКОЛОГИЯ ──
+  {
+    id: "gyn-01",
+    tag: "Гинекология",
+    tagColor: "vital",
+    title: "Оперативная гинекология: основы лапароскопии",
+    modules: 8, minutes: 100, level: "Базовый", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Оборудование, анатомия малого таза, базовые лапароскопические навыки.",
+    instructor: "проф. Краснова Т.А.",
+  },
+  {
+    id: "gyn-02",
+    tag: "Гинекология",
+    tagColor: "vital",
+    title: "Лапароскопическая гистерэктомия",
+    modules: 9, minutes: 110, level: "Продвинутый", nmo: 8, progress: 0,
+    status: "locked",
+    description: "TLH, LAVH. Гемостаз, отсечение шейки, ушивание купола влагалища.",
+    instructor: "д.м.н. Орлова Н.В.",
+  },
+  {
+    id: "gyn-03",
+    tag: "Гинекология",
+    tagColor: "vital",
+    title: "Хирургическое лечение эндометриоза",
+    modules: 7, minutes: 90, level: "Резидент", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Классификация, иссечение очагов, лечение глубокого инфильтративного эндометриоза.",
+    instructor: "проф. Краснова Т.А.",
+  },
+  {
+    id: "gyn-04",
+    tag: "Гинекология",
+    tagColor: "vital",
+    title: "Миомэктомия лапароскопическим доступом",
+    modules: 6, minutes: 75, level: "Резидент", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Показания, техника энуклеации, ушивание дефекта, морцелляция.",
+    instructor: "д.м.н. Орлова Н.В.",
+  },
+  {
+    id: "gyn-05",
+    tag: "Гинекология",
+    tagColor: "vital",
+    title: "Лапароскопия при внематочной беременности",
+    modules: 5, minutes: 60, level: "Базовый", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Тубэктомия, тубопластика, ушивание при интерстициальной беременности.",
+    instructor: "к.м.н. Соколова Л.В.",
+  },
+  {
+    id: "gyn-06",
+    tag: "Гинекология",
+    tagColor: "vital",
+    title: "Диагностическая и оперативная гистероскопия",
+    modules: 6, minutes: 70, level: "Базовый", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Патология полости матки, полипэктомия, миомэктомия, рассечение перегородки.",
+    instructor: "проф. Краснова Т.А.",
+  },
+  {
+    id: "gyn-07",
+    tag: "Гинекология",
+    tagColor: "vital",
+    title: "Неотложная гинекология: лапароскопический подход",
+    modules: 7, minutes: 80, level: "Продвинутый", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Апоплексия яичника, перекрут придатков, перфорация матки.",
+    instructor: "д.м.н. Орлова Н.В.",
+  },
+
+  // ── КАРДИОЛОГИЯ ──
+  {
+    id: "card-01",
+    tag: "Кардиология",
+    tagColor: "critical",
+    title: "Острый коронарный синдром: диагностика и тактика",
+    modules: 8, minutes: 90, level: "Резидент", nmo: 6, progress: 0,
+    status: "locked",
+    description: "ОКС с подъёмом и без подъёма ST, стратификация риска, реперфузия.",
+    instructor: "проф. Волков Д.А.",
+  },
+  {
+    id: "card-02",
+    tag: "Кардиология",
+    tagColor: "critical",
+    title: "Нарушения ритма сердца: современные подходы",
+    modules: 7, minutes: 85, level: "Резидент", nmo: 6, progress: 0,
+    status: "locked",
+    description: "ФП, желудочковые нарушения ритма, показания к ЭКС и РЧА.",
+    instructor: "д.м.н. Крылова Е.С.",
+  },
+  {
+    id: "card-03",
+    tag: "Кардиология",
+    tagColor: "critical",
+    title: "Хроническая сердечная недостаточность",
+    modules: 6, minutes: 70, level: "Базовый", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Классификация, диагностика, современная фармакотерапия.",
+    instructor: "проф. Волков Д.А.",
+  },
+  {
+    id: "card-04",
+    tag: "Кардиология",
+    tagColor: "critical",
+    title: "ЭКГ для хирурга: расшифровка и клиническое применение",
+    modules: 5, minutes: 55, level: "Базовый", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Ишемия, блокады, аритмии на ЭКГ. Интерпретация в периоперационном периоде.",
+    instructor: "д.м.н. Крылова Е.С.",
+  },
+  {
+    id: "card-05",
+    tag: "Кардиология",
+    tagColor: "critical",
+    title: "Периоперационная кардиология",
+    modules: 6, minutes: 70, level: "Продвинутый", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Оценка кардиального риска, антикоагулянты, ведение пациентов с ИБС.",
+    instructor: "проф. Волков Д.А.",
+  },
+  {
+    id: "card-06",
+    tag: "Кардиология",
+    tagColor: "critical",
+    title: "Кардиогенный шок: диагностика и неотложная помощь",
+    modules: 5, minutes: 60, level: "Продвинутый", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Патофизиология, гемодинамический мониторинг, инотропная поддержка.",
+    instructor: "проф. Волков Д.А.",
+  },
+
+  // ── АНЕСТЕЗИОЛОГИЯ ──
+  {
+    id: "anest-01",
+    tag: "Анестезиология",
+    tagColor: "warning",
+    title: "Анестезия при лапароскопических операциях",
+    modules: 6, minutes: 70, level: "Резидент", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Особенности пневмоперитонеума, ИВЛ в положении Тренделенбурга.",
+    instructor: "к.м.н. Быков Р.А.",
+  },
+  {
+    id: "anest-02",
+    tag: "Анестезиология",
+    tagColor: "warning",
+    title: "Интенсивная терапия сепсиса и септического шока",
+    modules: 9, minutes: 110, level: "Продвинутый", nmo: 8, progress: 0,
+    status: "locked",
+    description: "Критерии Сепсис-3, инфузионная терапия, вазопрессоры, антибиотики.",
+    instructor: "проф. Федоров В.М.",
+  },
+  {
+    id: "anest-03",
+    tag: "Анестезиология",
+    tagColor: "warning",
+    title: "Трудные дыхательные пути: алгоритм и оборудование",
+    modules: 7, minutes: 80, level: "Резидент", nmo: 6, progress: 0,
+    status: "locked",
+    description: "DAM-алгоритм, видеоларингоскопия, хирургический доступ к дыхательным путям.",
+    instructor: "к.м.н. Быков Р.А.",
+  },
+  {
+    id: "anest-04",
+    tag: "Анестезиология",
+    tagColor: "warning",
+    title: "Регионарная анестезия: основы и безопасность",
+    modules: 8, minutes: 90, level: "Резидент", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Спинальная и эпидуральная анестезия, плексусные блокады под УЗ-контролем.",
+    instructor: "проф. Федоров В.М.",
+  },
+  {
+    id: "anest-05",
+    tag: "Анестезиология",
+    tagColor: "warning",
+    title: "Острая боль: мультимодальная анальгезия",
+    modules: 5, minutes: 55, level: "Базовый", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Опиоидсберегающие стратегии, НПВС, кетамин, регионарные методы.",
+    instructor: "к.м.н. Быков Р.А.",
+  },
+  {
+    id: "anest-06",
+    tag: "Анестезиология",
+    tagColor: "warning",
+    title: "Анестезия у пациентов высокого риска",
+    modules: 7, minutes: 85, level: "Продвинутый", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Сердечная, дыхательная, почечная недостаточность в периоперационном периоде.",
+    instructor: "проф. Федоров В.М.",
+  },
+
+  // ── ОНКОЛОГИЯ ──
+  {
+    id: "onco-01",
+    tag: "Онкология",
+    tagColor: "warning",
+    title: "Онкологическая настороженность в практике хирурга",
+    modules: 5, minutes: 55, level: "Базовый", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Ранние симптомы, скрининг, маршрутизация пациента.",
+    instructor: "проф. Нечаев В.А.",
+  },
+  {
+    id: "onco-02",
+    tag: "Онкология",
+    tagColor: "warning",
+    title: "Лапароскопическая хирургия в онкологии",
+    modules: 8, minutes: 100, level: "Экспертный", nmo: 8, progress: 0,
+    status: "locked",
+    description: "Онкологические принципы при лапароскопических резекциях.",
+    instructor: "проф. Захаров М.Н.",
+  },
+  {
+    id: "onco-03",
+    tag: "Онкология",
+    tagColor: "warning",
+    title: "Колоректальный рак: стадирование и хирургическая тактика",
+    modules: 7, minutes: 85, level: "Резидент", nmo: 6, progress: 0,
+    status: "locked",
+    description: "TNM, мультидисциплинарный подход, тотальная мезоректумэктомия.",
+    instructor: "проф. Нечаев В.А.",
+  },
+  {
+    id: "onco-04",
+    tag: "Онкология",
+    tagColor: "warning",
+    title: "Рак желудка: диагностика и оперативное лечение",
+    modules: 6, minutes: 75, level: "Продвинутый", nmo: 6, progress: 0,
+    status: "locked",
+    description: "Гастрэктомия, лимфодиссекция D2, реконструктивные варианты.",
+    instructor: "проф. Захаров М.Н.",
+  },
+  {
+    id: "onco-05",
+    tag: "Онкология",
+    tagColor: "warning",
+    title: "Паллиативная помощь в онкологии",
+    modules: 5, minutes: 60, level: "Базовый", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Контроль боли, симптоматическое лечение, этические аспекты.",
+    instructor: "к.м.н. Суворова И.Л.",
+  },
+  {
+    id: "onco-06",
+    tag: "Онкология",
+    tagColor: "warning",
+    title: "Иммунотерапия в онкологии: основы для хирурга",
+    modules: 4, minutes: 45, level: "Базовый", nmo: 4, progress: 0,
+    status: "locked",
+    description: "Ингибиторы контрольных точек, периоперационные осложнения иммунотерапии.",
+    instructor: "проф. Нечаев В.А.",
+  },
+];
