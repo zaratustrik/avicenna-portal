@@ -4,80 +4,105 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   size?: "sm" | "md" | "lg";
   showText?: boolean;
+  showDescriptor?: boolean;
   className?: string;
   href?: string;
 }
 
 const sizes = {
-  sm: { mark: "w-8 h-8",   text: "text-sm"  },
-  md: { mark: "w-10 h-10", text: "text-base" },
-  lg: { mark: "w-14 h-14", text: "text-xl"   },
+  sm: { mark: "w-9 h-9",   text: "text-[15px]", desc: "text-[9px]"  },
+  md: { mark: "w-11 h-11", text: "text-lg",      desc: "text-[10px]" },
+  lg: { mark: "w-14 h-14", text: "text-2xl",     desc: "text-xs"     },
 };
 
-function LogoMark({ size }: { size: "sm" | "md" | "lg" }) {
-  const s = sizes[size];
+function BookIcon({ className }: { className?: string }) {
   return (
-    <div className={cn("flex items-center gap-3 select-none")}>
-      <div className={cn("flex-shrink-0 rounded-xl overflow-hidden", s.mark)}>
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <defs>
-            <linearGradient id="bg-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#3A8AE0" />
-              <stop offset="100%" stopColor="#1A5FB8" />
-            </linearGradient>
-            <linearGradient id="flame-grad" x1="20" y1="6" x2="20" y2="34" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="white" stopOpacity="1" />
-              <stop offset="100%" stopColor="white" stopOpacity="0.75" />
-            </linearGradient>
-          </defs>
-          <rect width="40" height="40" rx="10" fill="url(#bg-grad)" />
-          <path d="M20 6 C20 6 12 14 12 21 C12 25.4 15.6 29 20 29 C24.4 29 28 25.4 28 21 C28 14 20 6 20 6Z" fill="url(#flame-grad)" />
-          <path d="M20 13 C20 13 17 17 17 20.5 C17 22.4 18.3 24 20 24 C21.7 24 23 22.4 23 20.5 C23 17 20 13 20 13Z" fill="#2D7DD2" opacity="0.45" />
-          <rect x="15" y="31" width="10" height="2.5" rx="1.25" fill="white" opacity="0.6" />
-          <circle cx="11" cy="11" r="1" fill="white" opacity="0.4" />
-          <circle cx="29" cy="13" r="0.8" fill="white" opacity="0.3" />
-          <circle cx="13" cy="30" r="0.7" fill="white" opacity="0.25" />
-        </svg>
-      </div>
-      <span className={cn("font-semibold tracking-tight text-foreground leading-none", s.text)}>
-        Авиценна
-      </span>
-    </div>
+    <svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn("w-full h-full", className)}
+    >
+      <defs>
+        <linearGradient id="logo-bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#3A8AE0" />
+          <stop offset="100%" stopColor="#1A5FB8" />
+        </linearGradient>
+      </defs>
+
+      {/* Background */}
+      <rect width="40" height="40" rx="10" fill="url(#logo-bg)" />
+
+      {/* Left page — slight trapezoid for depth */}
+      <path d="M7 11 L19.5 13 L19.5 29.5 L7 29.5 Z" fill="white" opacity="0.92" />
+
+      {/* Right page */}
+      <path d="M20.5 13 L33 11 L33 29.5 L20.5 29.5 Z" fill="white" opacity="0.85" />
+
+      {/* Spine highlight */}
+      <rect x="19" y="12.5" width="2" height="17.5" rx="1" fill="white" opacity="0.5" />
+
+      {/* Text lines — left page */}
+      <line x1="9.5" y1="17"   x2="18" y2="17.6" stroke="#1A5FB8" strokeWidth="1.1" strokeLinecap="round" opacity="0.55" />
+      <line x1="9.5" y1="20.5" x2="18" y2="21.1" stroke="#1A5FB8" strokeWidth="1.1" strokeLinecap="round" opacity="0.45" />
+      <line x1="9.5" y1="24"   x2="15" y2="24.4" stroke="#1A5FB8" strokeWidth="1.1" strokeLinecap="round" opacity="0.38" />
+
+      {/* Text lines — right page */}
+      <line x1="22" y1="17.6" x2="30.5" y2="17"   stroke="#1A5FB8" strokeWidth="1.1" strokeLinecap="round" opacity="0.55" />
+      <line x1="22" y1="21.1" x2="30.5" y2="20.5" stroke="#1A5FB8" strokeWidth="1.1" strokeLinecap="round" opacity="0.45" />
+      <line x1="22" y1="24.4" x2="27"   y2="24"   stroke="#1A5FB8" strokeWidth="1.1" strokeLinecap="round" opacity="0.38" />
+
+      {/* Bottom cover arc */}
+      <path d="M7 29.5 Q20 33 33 29.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.65" />
+    </svg>
   );
 }
 
-export function Logo({ size = "sm", showText = true, className, href = "/" }: LogoProps) {
+export function Logo({
+  size = "sm",
+  showText = true,
+  showDescriptor = true,
+  className,
+  href = "/",
+}: LogoProps) {
+  const s = sizes[size];
+
   return (
-    <Link href={href} className={cn("flex items-center gap-3 select-none hover:opacity-80 transition-opacity", className)}>
-      <div className={cn("flex-shrink-0 rounded-xl overflow-hidden", sizes[size].mark)}>
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <defs>
-            <linearGradient id="logo-bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#3A8AE0" />
-              <stop offset="100%" stopColor="#1A5FB8" />
-            </linearGradient>
-            <linearGradient id="logo-flame" x1="20" y1="6" x2="20" y2="34" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="white" stopOpacity="1" />
-              <stop offset="100%" stopColor="white" stopOpacity="0.75" />
-            </linearGradient>
-          </defs>
-          <rect width="40" height="40" rx="10" fill="url(#logo-bg)" />
-          <path d="M20 6 C20 6 12 14 12 21 C12 25.4 15.6 29 20 29 C24.4 29 28 25.4 28 21 C28 14 20 6 20 6Z" fill="url(#logo-flame)" />
-          <path d="M20 13 C20 13 17 17 17 20.5 C17 22.4 18.3 24 20 24 C21.7 24 23 22.4 23 20.5 C23 17 20 13 20 13Z" fill="#2D7DD2" opacity="0.45" />
-          <rect x="15" y="31" width="10" height="2.5" rx="1.25" fill="white" opacity="0.6" />
-          <circle cx="11" cy="11" r="1" fill="white" opacity="0.4" />
-          <circle cx="29" cy="13" r="0.8" fill="white" opacity="0.3" />
-          <circle cx="13" cy="30" r="0.7" fill="white" opacity="0.25" />
-        </svg>
+    <Link
+      href={href}
+      className={cn("flex items-center gap-2.5 select-none hover:opacity-80 transition-opacity", className)}
+    >
+      <div className={cn("flex-shrink-0 rounded-xl overflow-hidden", s.mark)}>
+        <BookIcon />
       </div>
+
       {showText && (
-        <span className={cn("font-semibold tracking-tight text-foreground leading-none", sizes[size].text)}>
-          Авиценна
-        </span>
+        <div className="flex flex-col leading-none">
+          <span
+            className={cn("font-bold tracking-tight text-foreground", s.text)}
+            style={{ fontFamily: "var(--font-onest), var(--font-inter), sans-serif" }}
+          >
+            Авиценна
+          </span>
+          {showDescriptor && (
+            <span
+              className={cn("text-muted-foreground tracking-wide uppercase mt-0.5", s.desc)}
+              style={{ letterSpacing: "0.06em" }}
+            >
+              Медицинское образование
+            </span>
+          )}
+        </div>
       )}
     </Link>
   );
 }
 
-// Kept for internal use where Link is not needed (avoids nested <a> inside <a>)
-export { LogoMark };
+// Kept for internal use where Link wrapper is not needed
+export function LogoMark({ size = "sm" }: { size?: "sm" | "md" | "lg" }) {
+  return (
+    <div className={cn("flex-shrink-0 rounded-xl overflow-hidden", sizes[size].mark)}>
+      <BookIcon />
+    </div>
+  );
+}
