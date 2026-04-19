@@ -77,7 +77,7 @@ export default function LandingPage() {
             <Badge variant="outline" className="mb-4 border-vital/40 text-vital bg-vital/10">
               Возможности платформы
             </Badge>
-            <h2 className="font-heading text-4xl md:text-5xl mb-4">
+            <h2 className="text-4xl md:text-5xl mb-4 font-normal" style={{ fontFamily: "var(--font-onest), sans-serif" }}>
               Создан врачами для врачей
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
