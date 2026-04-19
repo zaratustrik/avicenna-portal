@@ -10,9 +10,9 @@ interface LogoProps {
 }
 
 const sizes = {
-  sm: { mark: "w-9 h-9",   text: "text-[15px]", desc: "text-[9px]"  },
-  md: { mark: "w-11 h-11", text: "text-lg",      desc: "text-[10px]" },
-  lg: { mark: "w-14 h-14", text: "text-2xl",     desc: "text-xs"     },
+  sm: { mark: "w-10 h-10", text: "text-[30px]", desc: "text-[9px]"  },
+  md: { mark: "w-12 h-12", text: "text-[36px]", desc: "text-[10px]" },
+  lg: { mark: "w-16 h-16", text: "text-[48px]", desc: "text-sm"     },
 };
 
 function BookIcon({ className }: { className?: string }) {
@@ -79,8 +79,8 @@ export function Logo({
       {showText && (
         <div className="flex flex-col leading-none">
           <span
-            className={cn("font-bold tracking-tight text-foreground", s.text)}
-            style={{ fontFamily: "var(--font-onest), var(--font-inter), sans-serif" }}
+            className={cn("tracking-tight text-foreground leading-none", s.text)}
+            style={{ fontFamily: "var(--font-marck), cursive" }}
           >
             Авиценна
           </span>

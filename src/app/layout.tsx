@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, DM_Serif_Display, Onest } from "next/font/google";
+import { Inter, DM_Serif_Display, Onest, Marck_Script } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -22,6 +22,13 @@ const onest = Onest({
   display: "swap",
 });
 
+const marckScript = Marck_Script({
+  subsets: ["latin", "cyrillic"],
+  weight: "400",
+  variable: "--font-marck",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Авиценна — Медицинское образование нового уровня",
   description:
@@ -36,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${inter.variable} ${dmSerifDisplay.variable} ${onest.variable} dark`}
+      className={`${inter.variable} ${dmSerifDisplay.variable} ${onest.variable} ${marckScript.variable} dark`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground antialiased flex flex-col">
